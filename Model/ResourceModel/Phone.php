@@ -10,9 +10,6 @@ use Smartbox\WorkSample\Api\Entity\PhoneInterface as Entity;
 
 class Phone extends AbstractDb
 {
-    /**
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
-     */
     protected function _construct()
     {
         $this->_init(Entity::MAIN_TABLE, Entity::ENTITY_ID);

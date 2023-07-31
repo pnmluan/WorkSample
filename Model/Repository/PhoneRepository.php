@@ -68,15 +68,18 @@ class PhoneRepository implements PhoneRepositoryInterface
             $phoneId = intval($phone->getId());
             /** @var Phone $currentPhone */
             $currentPhone = $this->get($phoneId);
-            $phoneId = $this->checkUnique($phone);
+            $editedPhoneId = $this->checkUnique($phone); // $editedPhoneId is queried from edited unique constraint
 
-            // Case No unique constraint => Can update phone
-            if (empty($phoneId) || $phoneId == $currentPhone->getId()) {
+            // Case No unique constraint or The same value between  $editedPhoneId and $phoneId => Can update phone
+            if (empty($editedPhoneId) || $editedPhoneId == $currentPhone->getId()) {
                 $this->phoneResource->save($phone);
                 return intval($phone->getId());
             }
 
-            // Case Having an unique constraint row which isn't phoneId => Can not update phone
+            /**
+             * Case existing an unique constraint row which $editedPhoneId was existed,
+             * But $editedPhoneId is not the same with $phoneId => Can not update phone
+             */
             throw new AlreadyExistsException(__(self::UPDATE_PHONE_ERROR_MESSAGE));
         } catch (AlreadyExistsException $exception) {
             throw $exception;

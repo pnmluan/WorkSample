@@ -17,6 +17,7 @@ class ErrorHandler
     public final const ALREADY_EXISTS_ERROR_MESSAGE = 'This Phone Inventory has already been existed';
     public final const DEFAULT_ERROR_MESSAGE = 'Cannot save this Phone Inventory. Please try again later.';
     public final const PHONE_NOT_FOUND_ERROR_MESSAGE = 'Could not update phone';
+    public final const INVENTORY_NOT_FOUND_ERROR_MESSAGE = 'Could not update inventory';
 
     /**
      * @param Exception $exception

@@ -85,6 +85,8 @@ class PhoneInventoryManagement implements PhoneInventoryManagementInterface
     }
 
     /**
+     * @param int $phoneId
+     * @param int $inventoryId
      * @param PhoneInventoryRequestInterface $request
      * @return PhoneInventoryResponseInterface
      * @throws WebApiContextException
@@ -97,9 +99,9 @@ class PhoneInventoryManagement implements PhoneInventoryManagementInterface
             $phoneId = $this->phoneRepository->update($this->phonePreparator->execute($request, $phoneId));
 
             if ($phoneId) {
-                $inventory = $this->inventoryPreparator->execute($request, $phoneId);
+                $inventory = $this->inventoryPreparator->execute($request, $phoneId, $inventoryId);
                 $this->inventoryValidator->validate($inventory);
-                $this->inventoryRepository->save($inventory);
+                $this->inventoryRepository->update($inventory);
             }
 
             $this->logger->info(

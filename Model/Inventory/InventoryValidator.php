@@ -16,7 +16,7 @@ class InventoryValidator
         }
 
         if (0 > $inventory->getQuantity()) {
-            throw new InvalidArgumentContextException('Invalid quantiry value');
+            throw new InvalidArgumentContextException('Invalid quantity value');
         }
 
         if (0 >  $inventory->getLikeNewPercentage() || 100 < $inventory->getLikeNewPercentage()) {
