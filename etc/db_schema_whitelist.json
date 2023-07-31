@@ -1,0 +1,117 @@
+{
+    "ws_manufacturer": {
+        "column": {
+            "id": true,
+            "name": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ws_memory": {
+        "column": {
+            "id": true,
+            "name": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ws_os": {
+        "column": {
+            "id": true,
+            "name": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ws_osversion": {
+        "column": {
+            "id": true,
+            "os_id": true,
+            "name": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "WS_OSVERSION_OS_ID_WS_OS_ID": true
+        }
+    },
+    "ws_bodycolor": {
+        "column": {
+            "id": true,
+            "model_id": true,
+            "name": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "WS_BODYCOLOR_MODEL_ID_WS_MODEL_ID": true
+        }
+    },
+    "ws_model": {
+        "column": {
+            "id": true,
+            "manufacturer_id": true,
+            "name": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true,
+            "os_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "WS_MODEL_MANUFACTURER_ID_WS_MANUFACTURER_ID": true,
+            "WS_MODEL_OS_ID_WS_OS_ID": true
+        }
+    },
+    "ws_phone": {
+        "column": {
+            "id": true,
+            "bodycolor_id": true,
+            "osversion_id": true,
+            "memory_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "WS_PHONE_BODYCOLOR_ID_WS_BODYCOLOR_ID": true,
+            "WS_PHONE_OSVERSION_ID_WS_OSVERSION_ID": true,
+            "WS_PHONE_MEMORY_ID_WS_MEMORY_ID": true,
+            "WS_PHONE_BODYCOLOR_ID_MEMORY_ID": true
+        }
+    },
+    "ws_inventory": {
+        "column": {
+            "id": true,
+            "phone_id": true,
+            "quantity": true,
+            "year": true,
+            "likenew_percentage": true,
+            "price": true,
+            "created_at": true,
+            "updated_at": true,
+            "is_active": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "WS_INVENTORY_PHONE_ID_WS_PHONE_ID": true,
+            "WS_INVENTORY_PHONE_ID_YEAR_LIKENEW_PERCENTAGE": true
+        }
+    }
+}

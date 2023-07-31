@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <!-- Manufacturer Table -->
+    <table name="ws_manufacturer" resource="default" engine="innodb" comment="Manufacturer Table">
+        <column xsi:type="smallint" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="30" comment="Name"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!-- Memory Table -->
+    <table name="ws_memory" resource="default" engine="innodb" comment="Memory Table">
+        <column xsi:type="smallint" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="30" comment="Name"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!-- OS Table -->
+    <table name="ws_os" resource="default" engine="innodb" comment="OS Table">
+        <column xsi:type="smallint" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="30" comment="Name"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!-- OSVersion Table -->
+    <table name="ws_osversion" resource="default" engine="innodb" comment="OSVersion Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="os_id" nullable="false" unsigned="true" comment="OS ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="30" comment="Name"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="WS_OSVERSION_OS_ID_OS_ID"
+                    table="ws_osversion" column="os_id" referenceTable="ws_os"
+                    referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+
+    <!-- BodyColor Table -->
+    <table name="ws_bodycolor" resource="default" engine="innodb" comment="BodyColor Table">
+        <column xsi:type="smallint" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="model_id" nullable="false" unsigned="true" comment="Model ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="30" comment="Name"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="WS_BODYCOLOR_MODEL_ID_MODEL_ID"
+                    table="ws_bodycolor" column="model_id" referenceTable="ws_model"
+                    referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+
+    <!-- Model Table -->
+    <table name="ws_model" resource="default" engine="innodb" comment="Model Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="manufacturer_id" nullable="false" unsigned="true" comment="Manufacturer ID"/>
+        <column xsi:type="smallint" name="os_id" nullable="false" unsigned="true" comment="OS ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="30" comment="Name"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="WS_MODEL_MANUFACTURER_ID_MANUFACTURER_ID"
+                table="ws_model" column="manufacturer_id" referenceTable="ws_manufacturer"
+                referenceColumn="id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign" referenceId="WS_MODEL_OS_ID_OS_ID"
+                table="ws_model" column="os_id" referenceTable="ws_os"
+                referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+
+    <!-- Phone Table -->
+    <table name="ws_phone" resource="default" engine="innodb" comment="Phone Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="bodycolor_id" nullable="false" unsigned="true" comment="BodyColor ID"/>
+        <column xsi:type="int" name="osversion_id" nullable="false" unsigned="true" comment="OSVersion ID"/>
+        <column xsi:type="smallint" name="memory_id" nullable="false" unsigned="true" comment="Memory ID"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="WS_PHONE_BODYCOLOR_ID_BODYCOLOR_ID"
+                    table="ws_phone" column="bodycolor_id" referenceTable="ws_bodycolor"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="WS_PHONE_OSV_ID_OSV_ID"
+                    table="ws_phone" column="osversion_id" referenceTable="ws_osversion"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="WS_PHONE_MEMORY_ID_MEMORY_ID"
+                    table="ws_phone" column="memory_id" referenceTable="ws_memory"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <!-- Add the unique constraint on bodycolor_id and memory_id -->
+        <constraint xsi:type="unique" referenceId="WS_PHONE_UNIQUE_COMBINATION">
+            <column name="bodycolor_id"/>
+            <column name="memory_id"/>
+        </constraint>
+    </table>
+
+    <!-- Inventory Table -->
+    <table name="ws_inventory" resource="default" engine="innodb" comment="Inventory Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="phone_id" nullable="false" unsigned="true" comment="Phone ID"/>
+        <column xsi:type="int" name="quantity" nullable="false" comment="Quantity"/>
+        <column xsi:type="smallint" name="year" nullable="false" unsigned="true" comment="Year"/>
+        <column xsi:type="smallint" name="likenew_percentage" nullable="false" unsigned="true" comment="Like New Percentage"/>
+        <column xsi:type="decimal" name="price" scale="6" precision="20" nullable="false" comment="Price"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <!-- Add the unique constraint on phone_id, year, and likenew_percentage -->
+        <constraint xsi:type="foreign" referenceId="WS_INVENTORY_PHONE_ID_PHONE_ID"
+                    table="ws_inventory" column="phone_id" referenceTable="ws_phone"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="WS_INVENTORY_UNIQUE_COMBINATION">
+            <column name="phone_id"/>
+            <column name="year"/>
+            <column name="likenew_percentage"/>
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Smartbox\WorkSample\Api\Entity\InventoryInterface"
+                type="Smartbox\WorkSample\Model\Entity\Inventory"/>
+
+    <preference for="Smartbox\WorkSample\Api\Entity\PhoneInterface"
+                type="Smartbox\WorkSample\Model\Entity\Phone"/>
+
+    <preference for="Smartbox\WorkSample\Api\Repository\InventoryRepositoryInterface"
+                type="Smartbox\WorkSample\Model\Repository\InventoryRepository"/>
+
+    <preference for="Smartbox\WorkSample\Api\Repository\PhoneRepositoryInterface"
+                type="Smartbox\WorkSample\Model\Repository\PhoneRepository"/>
+
+    <preference for="Smartbox\WorkSample\Api\Data\Response\PhoneInventoryResponseInterface"
+                type="Smartbox\WorkSample\Model\Data\Response\PhoneInventoryResponse"/>
+
+    <preference for="Smartbox\WorkSample\Api\Data\Request\PhoneInventoryRequestInterface"
+                type="Smartbox\WorkSample\Model\Data\Request\PhoneInventoryRequest"/>
+
+    <preference for="Smartbox\WorkSample\Api\Rest\PhoneInventoryManagementInterface"
+                type="Smartbox\WorkSample\Model\Rest\PhoneInventoryManagement"/>
+</config>
